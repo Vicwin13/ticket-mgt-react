@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@ticketmgt.com",
+      "password": "admin123",
+      "name": "Admin User",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "email": "user@ticketmgt.com",
+      "password": "user123",
+      "name": "Regular User",
+      "role": "user"
+    },
+    {
+      "id": "3",
+      "email": "demo@ticketmgt.com",
+      "password": "demo123",
+      "name": "Demo User",
+      "role": "user"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "2",
+      "title": "Password Reset",
+      "description": "Need to reset password for user account",
+      "status": "in-progress",
+      "priority": "medium",
+      "userId": 3,
+      "createdAt": "2024-01-14T14:20:00Z"
+    }
+  ]
+}
