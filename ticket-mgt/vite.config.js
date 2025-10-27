@@ -12,5 +12,15 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
+  },
+  // For production deployment to Netlify, API calls will be redirected
+  // to Netlify Functions via netlify.toml configuration
+  build: {
+    // Ensure the build output works correctly with Netlify's routing
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
   }
 })
