@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
-import axios from 'axios';
+import api from '../api/axios';
 import { toast } from 'react-toastify';
 
 const Login = () => {
@@ -29,7 +29,7 @@ const Login = () => {
     }
 
     try {
-      const usersResponse = await axios.get('/api/users');
+      const usersResponse = await api.get('/api/users');
       const user = usersResponse.data.find((u) => u.email === email);
 
       if (user && user.password === password) {
@@ -38,7 +38,7 @@ const Login = () => {
         localStorage.setItem('user_id', user.id);
         localStorage.setItem(
           'user_name',
-          `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.email,
+          `${user.firstName || user.name || ''}`.trim() || user.email,
         );
         toast.success('Login successful');
         navigate('/dashboard');

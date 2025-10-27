@@ -3,7 +3,7 @@ import './Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
-import axios from 'axios';
+import api from '../api/axios';
 import { toast } from 'react-toastify';
 
 const Signup = () => {
@@ -46,7 +46,7 @@ const Signup = () => {
 
     try {
       // Check if user already exists
-      const usersResponse = await axios.get('/api/users');
+      const usersResponse = await api.get('/api/users');
       const existingUser = usersResponse.data.find((u) => u.email === email);
 
       if (existingUser) {
@@ -64,7 +64,7 @@ const Signup = () => {
         token: `mocked-jwt-${Date.now()}`,
       };
 
-      await axios.post('/api/users', newUser);
+      await api.post('/api/users', newUser);
 
       toast.success('Account created successfully! Please login.');
       navigate('/login');

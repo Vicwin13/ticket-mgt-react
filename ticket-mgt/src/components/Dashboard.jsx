@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
 import TicketCard from './TicketCard';
-import axios from 'axios';
+import api from '../api/axios';
 
 const Dashboard = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -68,7 +68,7 @@ const Dashboard = () => {
 
   const fetchTickets = async () => {
     try {
-      const response = await axios.get('/api/tickets');
+      const response = await api.get('/api/tickets');
       setTickets(response.data);
     } catch (error) {
       console.error('Error fetching tickets:', error);
@@ -113,12 +113,13 @@ const Dashboard = () => {
         // For now, we'll use a mock implementation
         const fetchUserData = async () => {
           try {
-            const response = await axios.get('/api/users');
+            const response = await api.get('/api/users');
             const users = response.data;
             const user = users.find((u) => u.id === userId);
-            if (user && user.firstName) {
+            if (user && (user.firstName || user.name)) {
               // Use first name with capital letter
-              setUserName(user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1));
+              const name = user.firstName || user.name;
+              setUserName(name.charAt(0).toUpperCase() + name.slice(1));
             } else {
               // Fallback to email username if firstName is not available
               setUserName(user ? user.email.split('@')[0] : 'User');

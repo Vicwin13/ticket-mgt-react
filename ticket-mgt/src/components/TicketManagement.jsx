@@ -3,7 +3,7 @@ import './TicketManagement.css';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
+import api from '../api/axios';
 import { toast } from 'react-toastify';
 
 const TicketManagement = () => {
@@ -40,7 +40,7 @@ const TicketManagement = () => {
 
   const fetchTickets = async () => {
     try {
-      const response = await axios.get('/api/tickets');
+      const response = await api.get('/api/tickets');
       setTickets(response.data);
     } catch (error) {
       console.error('Error fetching tickets:', error);
@@ -135,7 +135,7 @@ const TicketManagement = () => {
 
       if (isEditMode) {
         // Update existing ticket
-        await axios.put(`/api/tickets/${ticketForm.id}`, ticketData);
+        await api.put(`/api/tickets/${ticketForm.id}`, ticketData);
         toast.success('Ticket updated successfully');
       } else {
         // Create new ticket
@@ -147,7 +147,7 @@ const TicketManagement = () => {
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         };
-        await axios.post('/api/tickets', newTicket);
+        await api.post('/api/tickets', newTicket);
         toast.success('Ticket created successfully');
       }
 
@@ -175,7 +175,7 @@ const TicketManagement = () => {
     if (!ticketToDelete) return;
 
     try {
-      await axios.delete(`/api/tickets/${ticketToDelete.id}`);
+      await api.delete(`/api/tickets/${ticketToDelete.id}`);
       toast.success('Ticket deleted successfully');
       await fetchTickets();
       closeDeleteModal();

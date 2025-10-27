@@ -4,19 +4,10 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:5001',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
-  },
-  // For production deployment to Netlify, API calls will be redirected
-  // to Netlify Functions via netlify.toml configuration
+  // For Vercel deployment, API routes in /api directory work automatically
+  // No proxy configuration needed for development
   build: {
-    // Ensure the build output works correctly with Netlify's routing
+    // Ensure the build output works correctly with Vercel's routing
     rollupOptions: {
       output: {
         manualChunks: undefined
