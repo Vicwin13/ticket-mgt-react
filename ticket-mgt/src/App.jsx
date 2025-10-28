@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
+import { Analytics } from "@vercel/analytics/react"
 import Dashboard from './components/Dashboard'
 import Footer from './components/Footer'
 import Home from './components/Home'
@@ -14,6 +15,7 @@ import { ToastContainer } from 'react-toastify'
 
 function App() {
   return (
+    <>
     <Router>
       <div className="app-container">
         <Routes>
@@ -50,9 +52,11 @@ function App() {
           draggable
           pauseOnHover
           theme="light"
-        />
+          />
       </div>
     </Router>
+      <Analytics/>
+    </>
   )
 }
 
