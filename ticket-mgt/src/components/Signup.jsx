@@ -46,7 +46,7 @@ const Signup = () => {
 
     try {
       // Check if user already exists
-      const usersResponse = await api.get('/api/users');
+      const usersResponse = await api.get('/users');
       const existingUser = usersResponse.data.find((u) => u.email === email);
 
       if (existingUser) {
@@ -64,7 +64,7 @@ const Signup = () => {
         token: `mocked-jwt-${Date.now()}`,
       };
 
-      await api.post('/api/users', newUser);
+      await api.post('/users', newUser);
 
       toast.success('Account created successfully! Please login.');
       navigate('/login');
@@ -84,28 +84,35 @@ const Signup = () => {
 
   return (
     <section className="total-container">
-      <div className="first_container">This is the image part</div>
+      <div className="first_container">
+         <div className=" text-[#fff] f_cont">
+          <h1 className=" ">
+            Tixily
+          </h1>
+          <p className='text-[#fff]'>Organization at its Peak</p>
+        </div>
+      </div>
 
       <div className="signup-container">
         <div className="signup-form">
           <div className="heading">
-            <h2>Sign Up</h2>
+            <h2>Sign Up for Tixily</h2>
             <p className="subtext">Create an account to manage your tickets efficiently</p>
           </div>
           <form onSubmit={(e) => { e.preventDefault(); Signup(); }}>
-            <div className="form-group">
+            <div className="form-groups">
               <label htmlFor="firstName">First Name</label>
               <input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
             </div>
-            <div className="form-group">
+            <div className="form-groups">
               <label htmlFor="lastName">Last Name</label>
               <input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
             </div>
-            <div className="form-group">
+            <div className="form-groups">
               <label htmlFor="email">Email</label>
               <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
-            <div className="form-group password-group">
+            <div className="form-groups password-group">
               <label htmlFor="password">Password</label>
               <div className="password-input-container">
                 <input
@@ -157,7 +164,7 @@ const Signup = () => {
                 </button>
               </div>
             </div>
-            <div className="form-group password-group">
+            <div className="form-groups password-group">
               <label htmlFor="confirmPassword">Confirm Password</label>
               <div className="password-input-container">
                 <input

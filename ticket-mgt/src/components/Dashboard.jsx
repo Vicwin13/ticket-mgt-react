@@ -1,10 +1,11 @@
 import './Dashboard.css';
 
-import { Link, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
+import NavLink from './NavLink';
 import TicketCard from './TicketCard';
 import api from '../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -23,6 +24,30 @@ const Dashboard = () => {
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 800) {
+        setIsCollapsed(true);
+      } else {
+        setIsCollapsed(false);
+      }
+    };
+
+    // Set initial state based on screen width
+    if (window.innerWidth < 800) {
+      setIsCollapsed(true);
+    } else {
+      setIsCollapsed(false);
+    }
+
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const currentDate = () => {
     const now = new Date();
@@ -68,7 +93,7 @@ const Dashboard = () => {
 
   const fetchTickets = async () => {
     try {
-      const response = await api.get('/api/tickets');
+      const response = await api.get('/tickets');
       setTickets(response.data);
     } catch (error) {
       console.error('Error fetching tickets:', error);
@@ -113,7 +138,7 @@ const Dashboard = () => {
         // For now, we'll use a mock implementation
         const fetchUserData = async () => {
           try {
-            const response = await api.get('/api/users');
+            const response = await api.get('/users');
             const users = response.data;
             const user = users.find((u) => u.id === userId);
             if (user && (user.firstName || user.name)) {
@@ -143,7 +168,7 @@ const Dashboard = () => {
       }
     }
 
-    // Fetch tickets for dashboard
+    
     const fetchData = async () => {
       await fetchTickets();
       setLoading(false);
@@ -169,16 +194,16 @@ const Dashboard = () => {
   return (
     <section className="dashboard">
       <aside className={`side ${isCollapsed ? 'collapsed' : ''}`}>
-        <button onClick={toggleSidebar} className="toggle-btn">
+        <button onClick={toggleSidebar} className="toggle-btn" aria-label="Toggle sidebar">
           {isCollapsed ? '→' : '←'}
         </button>
         {!isCollapsed && (
           <div className="sidebar-content">
-            <h3>Navigation</h3>
+            
             <nav className="nav-links">
-              <Link to="/" className="nav-link">Home</Link>
-              <Link to="/dashboard" className="nav-link active">Dashboard</Link>
-              <Link to="/tickets" className="nav-link">Ticket Management</Link>
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/dashboard">Dashboard</NavLink>
+              <NavLink to="/tickets">Ticket Management</NavLink>
             </nav>
             <button onClick={logout} className="logout">Logout</button>
           </div>
@@ -214,13 +239,14 @@ const Dashboard = () => {
                 <div className="ticket-info">
                   <h4>{ticket.title}</h4>
                   <p>{truncateDescription(ticket.description)}</p>
-                  <div className="ticket-meta">
+                  <div className='meta' >
+                    <div className="ticket-meta">
+
                     <span className={`status ${ticket.status}`}>{formatStatus(ticket.status)}</span>
                     <span className={`priority ${ticket.priority}`}>{formatPriority(ticket.priority)}</span>
                     <span className="ticket-date">{formatDate(ticket.createdAt)}</span>
-                  </div>
-                </div>
-                <div className="ticket-arrow">
+                    </div>
+                     <div className="ticket-arrow">
                   <svg
                     width="20"
                     height="20"
@@ -232,6 +258,9 @@ const Dashboard = () => {
                     <path d="M9 18l6-6-6-6" />
                   </svg>
                 </div>
+                  </div>
+                </div>
+               
               </div>
             ))}
           </div>

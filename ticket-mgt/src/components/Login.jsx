@@ -29,7 +29,7 @@ const Login = () => {
     }
 
     try {
-      const usersResponse = await api.get('/api/users');
+      const usersResponse = await api.get('/users');
       const user = usersResponse.data.find((u) => u.email === email);
 
       if (user && user.password === password) {
@@ -59,16 +59,19 @@ const Login = () => {
 
   return (
     <section className="flex justify-content align-center h-screen">
-      <div className="w-full bg-pink-500 h-full flex items-center justify-center">
-        <div className="text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">This is the image part</h2>
+      <div className="w-full first_container h-full flex items-center justify-center">
+        <div className=" text-[#fff] f_cont">
+          <h1 className=" ">
+            Tixily
+          </h1>
+          <p className='text-[#fff]'>Organization at its Peak</p>
         </div>
       </div>
 
       <div className="w-full bg-[#f7f7f7] h-full flex items-center justify-center">
       <div className="bg-[#fff] p-[2rem] rounded-[8px] w-full max-w-[350px]">
           <div className="mb-[2rem] ">
-            <h2 className=" font-semibold text-[#333] m-[0px] ">Login</h2>
+            <h2 className=" font-semibold text-[#333] m-[0px] ">Login to Tixily</h2>
             <p className="text-[12px] text-[#333] leading-[20px] m-[0px]">Transform your chaotic schedules into organized tickets</p>
           </div>
           
@@ -83,7 +86,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-[93.5%] p-[0.75rem] text-[1rem] border border-[#ddd] rounded-[4px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className=" p-[0.75rem] text-[1rem] border border-[#ddd] rounded-[4px] focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             
@@ -98,7 +101,7 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-[93.5%] p-[0.75rem] text-[1rem] border border-[#ddd]  rounded-[4px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className=" p-[0.75rem] text-[1rem] border border-[#ddd]  rounded-[4px] focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                   type="button"
@@ -152,9 +155,9 @@ const Login = () => {
             </button>
           </form>
           
-          <p className="mt-5 text-center text-sm text-gray-600">
+          <p className="mt-5 text-center text-[14px] text-[#666]">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-blue-600 hover:underline font-medium">
+            <Link to="/signup" className="text-[#0066ff] link hover:underline text-14px font-medium">
               Sign Up
             </Link>
           </p>

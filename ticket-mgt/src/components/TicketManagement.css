@@ -1,6 +1,7 @@
 .ticket-management {
   padding: 2rem;
-  max-width: 1200px;
+  max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -12,6 +13,7 @@
   color: #333;
   margin-bottom: 0.5rem;
 }
+
 
 .header p {
   color: #666;
@@ -123,18 +125,18 @@
 }
 
 .status.open {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #2ff708;
+  color: white;
 }
 
 .status.in-progress {
-  background-color: #fff8e1;
-  color: #f57c00;
+  background-color: #f57c00;
+  color: #fff8e1;
 }
 
 .status.closed {
-  background-color: #e8f5e9;
-  color: #388e3c;
+  background-color: #707070;
+  color: white;
 }
 
 .ticket-description {
@@ -463,11 +465,6 @@
   }
 }
 
-.header-left { 
-  display: flex; 
-  align-items: center; 
-  gap: 1rem; 
-} 
 
 .back-btn { 
   display: flex;
@@ -491,10 +488,18 @@
 
 .header-text h1 { 
   color: #333; 
-  margin-bottom: 0.5rem; 
+  margin-bottom: 0.5rem;
+  margin-top: 20px; 
 } 
 
 .header-text p { 
   color: #666; 
   margin: 0; 
+}
+
+.ticket-management {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 60px); /* Subtract footer height */
 }

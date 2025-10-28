@@ -6,16 +6,16 @@
 }
 
 .first_container {
-  background-color: hotpink;
+  
   height: inherit;
   width: 100%;
 }
 
 .signup-container {
   background-color: #f7f7f7;
+  
   height: inherit;
   width: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,10 +25,9 @@
   background: white;
   padding: 2rem;
   border-radius: 8px;
-
   height: auto;
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
 }
 
 h2 {
@@ -36,14 +35,16 @@ h2 {
   font-weight: 600;
 }
 
-.form-group {
-  margin-bottom: 0.5rem;
+.form-groups {
+  margin: 0.5rem;
+  
 }
 
 label {
   display: block;
   margin-bottom: 0rem;
   font-weight: 500;
+  
 }
 
 input {
@@ -52,6 +53,7 @@ input {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .signup-btn {
@@ -74,10 +76,15 @@ input {
 .heading {
   margin-bottom: 2rem;
 }
+.heading h2{
+  
+  margin: 0;
+}
+
 
 .heading p {
   color: #333;
-  line-height: 20px;
+  line-height: 15px;
   font-size: 12px;
 }
 

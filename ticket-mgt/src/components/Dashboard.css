@@ -1,12 +1,13 @@
+
 .dashboard {
   display: flex;
-  height: 100vh;
+  min-height: calc(100vh - 60px); /* Subtract footer height */
 }
 
 .side {
   border-right: 2px solid #e0e0e0;
   width: 250px;
-  height: 100%;
+  min-height: calc(100vh - 60px); /* Subtract footer height */
   background-color: #f8f9fa;
   transition: width 0.3s ease;
   position: relative;
@@ -34,6 +35,17 @@
   justify-content: center;
   z-index: 10;
   font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-btn:hover {
+  background-color: #0052cc;
+  transform: scale(1.1);
+}
+
+.toggle-btn:active {
+  transform: scale(0.95);
 }
 
 .sidebar-content {
@@ -55,14 +67,19 @@
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 2rem;
+  background: none;
 }
 
 .nav-link {
+  font-weight: 600;
   padding: 0.75rem 1rem;
   border-radius: 4px;
   text-decoration: none;
   color: #333;
+  width: 100%;
+  box-sizing: border-box;
   transition: background-color 0.2s;
+  
 }
 
 .nav-link:hover {
@@ -92,27 +109,27 @@
 .bigger-side {
   flex: 1;
   width: 100%;
-  height: 100%;
+  min-height: calc(100vh - 60px); /* Subtract footer height */
   transition: margin-left 0.3s ease;
+  padding:.5rem;  
 }
 
-.bigger-side.expanded {
-  margin-left: -50px;
-}
 
 .head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 7rem;
+  height: 10rem;
   padding: 3rem;
-  margin-top: 1rem;
-  width: 95%;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0166ff 0%, #764ba2 100%);
   border-radius: 8px;
   color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  
 }
 
 .head h1 {
@@ -127,42 +144,11 @@
 
 .cards {
   display: flex;
-  height: 10rem;
+  height: auto;
   justify-content: space-evenly;
   margin-top: 20px;
-  gap: 1rem;
-}
-
-
-.card {
-  border-radius: 10px;
-  max-width: 20rem;
-  width: 100%;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.5);
-  padding: 0.4rem 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.card-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-head h2 {
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-
-.card-body p {
-  font-size: 40px;
-  font-weight: 500;
-}
-
-.card img {
-  width: 1.5rem;
+  gap: 10px;
+  
 }
 
 .total-tickets {
@@ -172,43 +158,39 @@
   border-radius: 8px;
   backdrop-filter: blur(10px);
 }
-
 .total-tickets h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;
   font-weight: 500;
 }
-
 .total-count {
   font-size: 2.5rem;
   font-weight: 700;
   margin: 0;
 }
-
 .recent-tickets {
   margin-top: 2rem;
-  padding: 0 2rem;
-  height: calc(100vh - 400px);
+  
+  min-height: calc(100vh - 460px); /* Adjusted to account for footer */
   display: flex;
   flex-direction: column;
 }
-
 .recent-tickets h2 {
   margin-bottom: 1.5rem;
   color: #333;
   font-size: 1.5rem;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Prevent the header from
+shrinking */
 }
-
 .tickets-list {
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 1rem;
   overflow-y: auto;
   flex: 1;
   padding-right: 0.5rem;
 }
-
 .ticket-item {
   background: white;
   border-radius: 8px;
@@ -216,114 +198,127 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
   border-left: 4px solid transparent;
 }
-
 .ticket-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   border-left-color: #0066ff;
 }
-
 .ticket-info {
   flex: 1;
+  width: 100%;
 }
-
 .ticket-info h4 {
   margin: 0 0 0.5rem 0;
   color: #333;
   font-size: 1.1rem;
   font-weight: 600;
 }
-
 .ticket-info p {
   margin: 0 0 1rem 0;
   color: #555;
   font-size: 0.9rem;
   line-height: 1.4;
 }
-
 .ticket-meta {
   display: flex;
   gap: 0.5rem;
   align-items: center;
   flex-wrap: wrap;
+  
 }
-
 .ticket-meta .status {
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 500;
 }
-
+.meta{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  
+}
 .ticket-meta .status.open {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: #1af705;
+  color: #444546;
 }
-
 .ticket-meta .status.in-progress {
-  background-color: #fff8e1;
-  color: #f57c00;
+  background-color: #f57c00;
+  color: #fff8e1;
 }
-
 .ticket-meta .status.closed {
-  background-color: #e8f5e9;
-  color: #388e3c;
+  background-color: #7f817f;
+  color: #f7f7f7;
 }
-
 .ticket-meta .priority {
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 500;
 }
-
 .ticket-meta .priority.low {
   background-color: #e8f5e9;
   color: #388e3c;
 }
-
 .ticket-meta .priority.medium {
   background-color: #fff8e1;
   color: #f57c00;
 }
-
 .ticket-meta .priority.high {
   background-color: #ffebee;
   color: #d32f2f;
 }
-
 .ticket-date {
   color: #888;
   font-size: 0.75rem;
 }
-
 .ticket-arrow {
   color: #666;
   margin-left: 1rem;
   transition: transform 0.3s ease;
 }
-
 .ticket-item:hover .ticket-arrow {
   transform: translateX(3px);
 }
-
 .no-tickets {
   text-align: center;
   padding: 2rem;
   color: #666;
   font-style: italic;
-  overflow-y: auto;
-  flex: 1;
+} /* Responsive Design */
+@media (max-width: 800px) {
+  .side:not(.collapsed) {
+    width: 250px;
+  }
+  
+  .side.collapsed {
+    width: 50px;
+  }
+  
+  .side.collapsed .sidebar-content {
+    display: none;
+  }
+  
+  .side:not(.collapsed) .sidebar-content {
+    display: flex;
+  }
+  
+  .toggle-btn {
+    right: -15px;
+    top: 20px;
+  }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-  .ticket-item {
+  /* .ticket-item {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
@@ -334,6 +329,34 @@
   .ticket-meta {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.25rem;
+    gap: 0.25rem ;
+  } */
+  .head{
+    padding: 1rem;
   }
+  .total-tickets {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: .3rem .5rem;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  position: absolute;
+  right: 10px;
+}
+.total-tickets h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: .5rem;
+  font-weight: 500;
+}
+.cards{
+  flex-direction: column;
+  margin-bottom: 2rem;
+  
+}
+}
+
+/* Additional styles for no-tickets section */
+.no-tickets {
+  overflow-y: auto;
+  flex: 1;
 }

@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // For Vercel deployment, API routes in /api directory work automatically
-  // No proxy configuration needed for development
+  // For development, proxy API requests to json-server
   build: {
     // Ensure the build output works correctly with Vercel's routing
     rollupOptions: {
@@ -18,6 +18,18 @@ export default defineConfig({
     fs: {
       // Allow serving files from project root
       allow: ['..']
+    },
+    proxy: {
+      '/users': {
+        target: 'http://localhost:3003',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/tickets': {
+        target: 'http://localhost:3003',
+        changeOrigin: true,
+        secure: false,
+      }
     }
   }
 })

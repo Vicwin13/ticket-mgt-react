@@ -40,7 +40,7 @@ const TicketManagement = () => {
 
   const fetchTickets = async () => {
     try {
-      const response = await api.get('/api/tickets');
+      const response = await api.get('/tickets');
       setTickets(response.data);
     } catch (error) {
       console.error('Error fetching tickets:', error);
@@ -135,7 +135,7 @@ const TicketManagement = () => {
 
       if (isEditMode) {
         // Update existing ticket
-        await api.put(`/api/tickets/${ticketForm.id}`, ticketData);
+        await api.put(`/tickets/${ticketForm.id}`, ticketData);
         toast.success('Ticket updated successfully');
       } else {
         // Create new ticket
@@ -147,7 +147,7 @@ const TicketManagement = () => {
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
         };
-        await api.post('/api/tickets', newTicket);
+        await api.post('/tickets', newTicket);
         toast.success('Ticket created successfully');
       }
 
@@ -175,7 +175,7 @@ const TicketManagement = () => {
     if (!ticketToDelete) return;
 
     try {
-      await api.delete(`/api/tickets/${ticketToDelete.id}`);
+      await api.delete(`/tickets/${ticketToDelete.id}`);
       toast.success('Ticket deleted successfully');
       await fetchTickets();
       closeDeleteModal();

@@ -1,31 +1,35 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  
+  const handleGetStarted = () => {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      navigate('/dashboard');
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <nav className="">
       
-        <div className="flex justify-between border-2 w-full items-center">
+            <h1 className="font-bold text-gray-800 margin-[0rem] tixily">Tixily</h1>
           
-          <div className="flex items-center border-2">
-            <h1 className="font-bold text-gray-800">Tixily</h1>
-          </div>
-          
-        
-          <div className="flex items-center  justify-between gap-4 w-[10rem]  ">
-            <button>
-              
+          <div className="flex items-center  gap-[1rem]  ">
             <Link
               to="/login"
-              className="text-gray-600 hover:text-gray-800 font-medium py-2 px-4 rounded transition-colors"
+              className="login py-[10px] bg-[#ffd700]   px-[15px] rounded-[8px] cursor-pointer transition-colors"
               >
               Login
             </Link>
-              </button>
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors">
+           
+            <button className="started" onClick={handleGetStarted}>
               Get Started
             </button>
           </div>
-        </div>
+   
       
     </nav>
   );

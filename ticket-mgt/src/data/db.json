@@ -31,6 +31,26 @@
       "priority": "medium",
       "userId": 3,
       "createdAt": "2024-01-14T14:20:00Z"
+    },
+    {
+      "id": "1761664093235",
+      "title": "poiuy",
+      "description": "piaoh elwdciydu iy",
+      "status": "open",
+      "priority": "low",
+      "userId": 1,
+      "createdAt": "2025-10-28T15:08:13.235Z",
+      "updatedAt": "2025-10-28T15:08:13.235Z"
+    },
+    {
+      "id": "1761664118577",
+      "title": "nbvertr",
+      "description": "lyastrvtybynmo",
+      "status": "closed",
+      "priority": "high",
+      "userId": 1,
+      "createdAt": "2025-10-28T15:08:38.577Z",
+      "updatedAt": "2025-10-28T15:08:38.577Z"
     }
   ]
 }
