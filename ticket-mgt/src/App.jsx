@@ -3,7 +3,6 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
-import { Analytics } from "@vercel/analytics/react"
 import Dashboard from './components/Dashboard'
 import Footer from './components/Footer'
 import Home from './components/Home'
@@ -39,7 +38,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-        <Analytics/>
         </Routes>
         <ToastContainer
           position="top-right"
