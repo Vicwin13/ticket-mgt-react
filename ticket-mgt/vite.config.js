@@ -13,5 +13,11 @@ export default defineConfig({
         manualChunks: undefined
       }
     }
+  },
+  server: {
+    fs: {
+      // Allow serving files from project root
+      allow: ['..']
+    }
   }
 })

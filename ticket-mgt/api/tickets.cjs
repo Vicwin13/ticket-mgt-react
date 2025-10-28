@@ -1,26 +1,15 @@
+/* eslint-disable */
 // Initial data from db.json
 let db = {
-  users: [
-    {
-      "id": "1",
-      "email": "admin@ticketmgt.com",
-      "password": "admin123",
-      "name": "Admin User",
-      "role": "admin"
-    },
+  tickets: [
     {
       "id": "2",
-      "email": "user@ticketmgt.com",
-      "password": "user123",
-      "name": "Regular User",
-      "role": "user"
-    },
-    {
-      "id": "3",
-      "email": "demo@ticketmgt.com",
-      "password": "demo123",
-      "name": "Demo User",
-      "role": "user"
+      "title": "Password Reset",
+      "description": "Need to reset password for user account",
+      "status": "in-progress",
+      "priority": "medium",
+      "userId": 3,
+      "createdAt": "2024-01-14T14:20:00Z"
     }
   ]
 };
@@ -46,9 +35,9 @@ function generateId(collection) {
   return (maxId + 1).toString();
 }
 
-export default function handler(req, res) {
+function handler(req, res) {
   const { method, query } = req;
-  const { id } = query;
+  const { id, userId } = query;
 
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -67,36 +56,42 @@ export default function handler(req, res) {
     switch (method) {
       case 'GET':
         if (id) {
-          const user = findById(db.users, id);
-          response = user || { error: 'User not found' };
-          statusCode = user ? 200 : 404;
+          const ticket = findById(db.tickets, id);
+          response = ticket || { error: 'Ticket not found' };
+          statusCode = ticket ? 200 : 404;
         } else {
-          response = db.users;
+          // Filter by userId if provided in query params
+          if (userId) {
+            response = db.tickets.filter(ticket => ticket.userId == userId);
+          } else {
+            response = db.tickets;
+          }
         }
         break;
 
       case 'POST': {
-        const newUser = req.body;
-        newUser.id = generateId(db.users);
-        db.users.push(newUser);
-        response = newUser;
+        const newTicket = req.body;
+        newTicket.id = generateId(db.tickets);
+        newTicket.createdAt = new Date().toISOString();
+        db.tickets.push(newTicket);
+        response = newTicket;
         statusCode = 201;
         break;
       }
 
       case 'PUT': {
         if (id) {
-          const index = findIndexById(db.users, id);
+          const index = findIndexById(db.tickets, id);
           if (index !== -1) {
-            const updatedUser = req.body;
-            db.users[index] = { ...db.users[index], ...updatedUser };
-            response = db.users[index];
+            const updatedTicket = req.body;
+            db.tickets[index] = { ...db.tickets[index], ...updatedTicket };
+            response = db.tickets[index];
           } else {
-            response = { error: 'User not found' };
+            response = { error: 'Ticket not found' };
             statusCode = 404;
           }
         } else {
-          response = { error: 'User ID is required' };
+          response = { error: 'Ticket ID is required' };
           statusCode = 400;
         }
         break;
@@ -104,18 +99,20 @@ export default function handler(req, res) {
 
       case 'DELETE': {
         if (id) {
-          const index = findIndexById(db.users, id);
+          const index = findIndexById(db.tickets, id);
           if (index !== -1) {
-            db.users.splice(index, 1);
+            db.tickets.splice(index, 1);
             response = { success: true };
           } else {
-            response = { error: 'User not found' };
+            response = { error: 'Ticket not found' };
             statusCode = 404;
           }
         } else {
-          response = { error: 'User ID is required' };
+          response = { error: 'Ticket ID is required' };
           statusCode = 400;
         }
+        
+        module.exports = handler;
         break;
       }
 

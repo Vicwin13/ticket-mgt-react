@@ -9,6 +9,7 @@ This guide explains how to deploy your ticket management application to Vercel w
 2. **Configuration**: Added `vercel.json` to configure:
    - API routing for `/api/*` endpoints
    - SPA fallback routing for client-side routing
+   - Automatic function runtime detection (no manual runtime specification needed)
 
 3. **Data Storage**: The functions use in-memory storage with initial data from `src/data/db.json`. This approach works well with Vercel's serverless environment.
 
@@ -156,12 +157,35 @@ For local development with Vercel:
 
 2. Start the development server:
    ```bash
-   npm run dev
-   ```
-
-3. In a separate terminal, start Vercel dev server:
-   ```bash
-   vercel dev
+   npm run vercel-dev
    ```
 
 This will run both the frontend and API routes on the same port, providing a seamless development experience.
+
+## Troubleshooting Deployment Issues
+
+### Function Runtime Error
+If you encounter an error like "Function Runtimes must have a valid version", ensure:
+- Your `vercel.json` doesn't specify a runtime (Vercel auto-detects it)
+- API routes use CommonJS syntax (`module.exports` instead of `export default`)
+- ESLint is disabled for API files with `/* eslint-disable */`
+
+### Path Resolution Error
+If you encounter an error like "directory doesn't exist" when running `npm run vercel-dev`:
+1. Remove the `.vercel` directory: `rm -rf .vercel`
+2. This clears cached Vercel configuration that may point to wrong paths
+3. Run `npm run vercel-dev` again to reinitialize
+
+### API Routes Not Working in Development
+If API routes return HTML instead of JSON during local development:
+1. This is expected behavior - Vercel dev runs Vite frontend server
+2. API routes work correctly in production deployment
+3. For testing API functionality, deploy to Vercel first
+4. The frontend will work with API routes in production
+
+### Common Fixes
+1. Remove any `runtime` specification from `vercel.json`
+2. Use `module.exports = handler;` instead of `export default handler;`
+3. Add `/* eslint-disable */` at the top of API files
+4. Clear Vercel cache by removing `.vercel` directory if path issues occur
+5. Rename API files from `.js` to `.cjs` when using ES module package.json
