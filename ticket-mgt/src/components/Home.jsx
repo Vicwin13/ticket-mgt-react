@@ -1,5 +1,4 @@
 import Navbar from './Navbar.jsx';
-import React from 'react';
 
 const Home = () => {
   return (

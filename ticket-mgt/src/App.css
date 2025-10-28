@@ -12,7 +12,7 @@
   min-height: 100vh;
 }
 .home{
-  height: 100vh;
+  min-height: 100vh;
   background: url('./assets/bg.svg');
   overflow: hidden;
   background-position: center;
